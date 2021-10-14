@@ -1,15 +1,9 @@
-let getRandomInteger = function(min, max) {
+const getRandomInteger = function(min = 0, max = 0) {
   return Math.random() * (max - min) + min;
-
 }
-console.log(getRandomInteger(5, 100));
+console.log(Math.floor(getRandomInteger(4, 8)));
 
- let checkMaxLength = function(checkedLength, maxLength) {
-  if (checkedLength <= maxLength ) {
-    return true;
-  }
-  else {
-    return false;
-  }
+ const checkMaxLength = function(checkedString, maxLength) {
+  return (checkedString.length <= maxLength) ? true : false;
  }
- console.log(checkMaxLength(55, 35))
+ console.log(checkMaxLength('Ехал грека через реку', 25))
