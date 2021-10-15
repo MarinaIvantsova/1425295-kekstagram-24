@@ -1,10 +1,10 @@
 const getRandomInteger = function(min = 0, max = 0) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
-Math.floor(getRandomInteger(4, 8));
+getRandomInteger(4, 8);
 
-const checkMaxLength = function(checkedString, maxLength) {
+const checkMaxLength = function(checkedString = '', maxLength = 0) {
   return (checkedString.length <= maxLength);
 };
 
