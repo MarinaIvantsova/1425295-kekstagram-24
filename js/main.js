@@ -28,36 +28,38 @@ const checkMaxLength = function (checkedString = '', maxLength = 0) {
 };
 
 checkMaxLength('Ехал грека через реку', 25);
-
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
 }
+let counter = 0;
+const createSuffleIntArray = function (length) {
+  const arr = [];
+  for (let integer = 0; integer < length; integer++) {
+    arr.push(integer);
+  }
+  shuffle(arr);
+  return arr;
+};
 
-const arr = [];
-let int = 0;
-for (let i = 0; i < 1000; i++) {
-  arr.push(i);
-}
-shuffle(arr);
-
+const suffleArr = createSuffleIntArray(1000);
 const createComments = function (maxLength) {
   const result = [];
-  for (let integer = 0; i < maxLength; integer++) {
+  for (let integer = 0; integer < maxLength; integer++) {
     result.push(
       {
-        id: arr[int++],
+        id: suffleArr[counter++],
         avatar: AVATAR_START + getRandomInteger(1, 6) + AVATAR_EXTEND,
         message: MESSAGE_MOCK[getRandomInteger(0, MESSAGE_MOCK.length - 1)],
         name: NAMES_MOCK[getRandomInteger(0, NAMES_MOCK.length - 1)],
-      }
-    )
-  };
+      },
+    );
+  }
   return result;
-}
+};
 
 const createData = function (maxLength) {
   const result = [];
-  for (let integer = 1; i <= maxLength; integer++) {
+  for (let integer = 1; integer <= maxLength; integer++) {
     result.push({
       id: integer,
       url: IMG_START + integer + IMG_EXTEND,
@@ -68,3 +70,5 @@ const createData = function (maxLength) {
   }
   return result;
 };
+
+createData(MAX_ITEM);
