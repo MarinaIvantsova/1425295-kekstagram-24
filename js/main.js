@@ -44,7 +44,7 @@ const createSuffleIntArray = function (length) {
 const suffleArr = createSuffleIntArray(1000);
 const createComments = function (maxLength) {
   const result = [];
-  for (let integer = 0; integer < maxLength; integer++) {
+  for (let index = 0; index < maxLength; index++) {
     result.push(
       {
         id: suffleArr[counter++],
@@ -59,10 +59,10 @@ const createComments = function (maxLength) {
 
 const createData = function (maxLength) {
   const result = [];
-  for (let integer = 1; integer <= maxLength; integer++) {
+  for (let index = 1; index <= maxLength; index++) {
     result.push({
-      id: integer,
-      url: IMG_START + integer + IMG_EXTEND,
+      id: index,
+      url: IMG_START + index + IMG_EXTEND,
       description: 'Ехал грека через реку',
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
       comments: createComments(getRandomInteger(2, 5)),
