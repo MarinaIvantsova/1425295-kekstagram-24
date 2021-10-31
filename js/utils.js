@@ -21,6 +21,5 @@ const createSuffleIntArray = function (length) {
   return arr;
 };
 
-const suffleArr = createSuffleIntArray(1000);
 
-export {getRandomInteger, suffleArr};
+export {getRandomInteger, createSuffleIntArray};
