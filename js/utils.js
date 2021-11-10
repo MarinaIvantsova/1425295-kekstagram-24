@@ -8,9 +8,9 @@ const checkMaxLength = function (checkedString = '', maxLength = 0) {
 
 checkMaxLength('Ехал грека через реку', 25);
 */
-function shuffle(array) {
+const shuffle = function (array) {
   array.sort(() => Math.random() - 0.5);
-}
+};
 
 const createSuffleIntArray = function (length) {
   const arr = [];
@@ -22,4 +22,4 @@ const createSuffleIntArray = function (length) {
 };
 
 
-export {getRandomInteger, createSuffleIntArray};
+export { getRandomInteger, createSuffleIntArray };
