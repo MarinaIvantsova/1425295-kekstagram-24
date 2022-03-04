@@ -1,10 +1,13 @@
-import {IMG_START, IMG_EXTEND, MIN_LIKES, MAX_LIKES, AVATAR_START, AVATAR_EXTEND, MESSAGE_MOCK, NAMES_MOCK} from './constants.js';
-import {getRandomInteger, createSuffleIntArray} from './utils.js';
+import { IMG_START, IMG_EXTEND, MIN_LIKES, MAX_LIKES, AVATAR_START, AVATAR_EXTEND, MESSAGE_MOCK, NAMES_MOCK } from './constants.js';
+import { getRandomInteger, createSuffleIntArray } from './utils.js';
 
 const suffleArr = createSuffleIntArray(1000);
+let counter = 0;
 const createComments = function (maxLength) {
   const result = [];
-  let counter = 0;
+  if (counter >= 1000) {
+    counter = 0;
+  }
   for (let index = 0; index < maxLength; index++) {
     result.push(
       {
@@ -32,4 +35,4 @@ const createData = function (maxLength) {
   return result;
 };
 
-export {createData};
+export { createData };
