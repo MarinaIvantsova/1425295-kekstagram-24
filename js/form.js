@@ -18,28 +18,35 @@ const validateHashtag = function (currentHashTag) {
 
 };
 
-const validateSameHashtags = function (current, next) {
-  if (current === next) {
-    hashtagElement.setCustomValidity('#ХэшТег и #хэштег считаются одним и тем же тегом, теги не должны повторяться.');
-  }
-};
-
 
 const onUploadForm = function () {
-  const hashtags = hashtagElement.value;
-  hashtagElement.setCustomValidity('');
-  const arrayOfHashtags = hashtags.split(' ');
-  if (arrayOfHashtags.length > MAX_HASHTAG_NUMBERS) {
-    hashtagElement.setCustomValidity(`Хэш-тегов не должно быть ${MAX_HASHTAG_NUMBERS}`);
+  const hashtags = hashtagElement.value.trim();
+  if (hashtags.length === 0) {
+    hashtagElement.setCustomValidity('');
   } else {
+    hashtagElement.setCustomValidity('');
+    const arrayOfHashtags = hashtags.split(' ');
+
+    const unique = {};
+    let int = 0;
     for (let i = 0; i < arrayOfHashtags.length; i++) {
-      validateHashtag(arrayOfHashtags[i]);
-      for (let j = i + 1; j < arrayOfHashtags.length; j++) {
-        const currentHashtag = arrayOfHashtags[i].toLowerCase();
-        const nextHashtag = arrayOfHashtags[j].toLowerCase();
-        validateSameHashtags(currentHashtag, nextHashtag);
+      if (arrayOfHashtags[i] === '') {
+        hashtagElement.setCustomValidity('Нельзя больше одного пробела между хэштегами');
+      } else {
+        validateHashtag(arrayOfHashtags[i]);
+        int++;
+        if (unique[arrayOfHashtags[i].toLowerCase()] !== 1) {
+          unique[arrayOfHashtags[i].toLowerCase()] = 1;
+        }
+        else {
+          hashtagElement.setCustomValidity('#ХэшТег и #хэштег считаются одним и тем же тегом, теги не должны повторяться.');
+        }
       }
     }
+    if (int > MAX_HASHTAG_NUMBERS) {
+      hashtagElement.setCustomValidity(`Хэш-тегов не должно быть больше, чем  ${MAX_HASHTAG_NUMBERS}`);
+    }
+
   }
 };
 
