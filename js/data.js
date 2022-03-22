@@ -23,13 +23,13 @@ const createComments = function (maxLength) {
 
 const createData = function (maxLength) {
   const result = [];
-  for (let index = 1; index <= maxLength; index++) {
+  for (let index = 0; index < maxLength; index++) {
     result.push({
-      id: index,
-      url: IMG_START + index + IMG_EXTEND,
+      id: index + 1,
+      url: IMG_START + (index + 1) + IMG_EXTEND,
       description: 'Ехал грека через реку',
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-      comments: createComments(getRandomInteger(2, 5)),
+      comments: createComments(getRandomInteger(2, 150)),
     });
   }
   return result;
