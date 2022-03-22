@@ -26,27 +26,25 @@ const onUploadForm = function () {
   } else {
     hashtagElement.setCustomValidity('');
     const arrayOfHashtags = hashtags.split(' ');
-
     const unique = {};
     let int = 0;
+
     for (let i = 0; i < arrayOfHashtags.length; i++) {
-      if (arrayOfHashtags[i] === '') {
-        hashtagElement.setCustomValidity('Нельзя больше одного пробела между хэштегами');
-      } else {
-        validateHashtag(arrayOfHashtags[i]);
-        int++;
-        if (unique[arrayOfHashtags[i].toLowerCase()] !== 1) {
-          unique[arrayOfHashtags[i].toLowerCase()] = 1;
-        }
-        else {
-          hashtagElement.setCustomValidity('#ХэшТег и #хэштег считаются одним и тем же тегом, теги не должны повторяться.');
-        }
+
+      validateHashtag(arrayOfHashtags[i].trim());
+      int++;
+
+      if (unique[arrayOfHashtags[i].toLowerCase()] !== 1) {
+        unique[arrayOfHashtags[i].toLowerCase()] = 1;
+      }
+      else {
+        hashtagElement.setCustomValidity('#ХэшТег и #хэштег считаются одним и тем же тегом, теги не должны повторяться.');
       }
     }
+
     if (int > MAX_HASHTAG_NUMBERS) {
       hashtagElement.setCustomValidity(`Хэш-тегов не должно быть больше, чем  ${MAX_HASHTAG_NUMBERS}`);
     }
-
   }
 };
 
