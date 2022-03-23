@@ -1,5 +1,5 @@
 
-let commentsBound = 5;
+let commentsBound;
 
 const createComments = function (data, comment, similarListFragment, commentsList) {
   let breakBtn = 0;
@@ -29,7 +29,7 @@ const createFullSizeImage = function (data) {
   const likesCount = document.querySelector('.likes-count');
   const similarListFragment = document.createDocumentFragment();
   commentsLoader.classList.remove('hidden');
-
+  commentsBound = 5;
   if (commentsBound >= data.comments.length) {
     commentsBound = data.comments.length;
     commentsLoader.classList.add('hidden');
