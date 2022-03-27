@@ -1,39 +1,73 @@
-const createFullSizeImage = function (data) {
-  const bigPicture = document.querySelector('.big-picture');
-  const descriptionItem = document.querySelector('.social__caption');
-  const comment = document.querySelector('.social__comment');
-  const commentsList = document.querySelector('.social__comments');
-  const socialCommentCount = document.querySelector('.social__comment-count');
-  const commentsLoader = document.querySelector('.comments-loader');
-  const likesCount = document.querySelector('.likes-count');
-  const commentsCount = document.querySelector('.comments-count');
-  const similarListFragment = document.createDocumentFragment();
-  const commentsBound = 5;
+
+const bigPicture = document.querySelector('.big-picture');
+const body = document.querySelector('body');
+let limit;
+
+const createComments = function (comment, commentsList, data) {
   let breakBtn = 0;
-
-  bigPicture.classList.remove('hidden');
-  socialCommentCount.classList.remove('hidden');
-  commentsLoader.classList.remove('hidden');
-  bigPicture.querySelector('img').src = data.url;
-  descriptionItem.textContent = data.description;
-  likesCount.textContent = data.likes;
-  commentsCount.textContent = data.comments.length;
-  socialCommentCount.value = commentsBound;
-
+  const documentFragment = document.createDocumentFragment();
 
   data.comments.forEach(({ avatar, name, message }) => {
-    if (breakBtn === commentsBound) {
+    if (breakBtn === limit) {
       return;
     }
-    const commentItem = comment.cloneNode(true);
-    commentItem.querySelector('.social__picture').src = avatar;
-    commentItem.querySelector('.social__picture').alt = name;
-    commentItem.querySelector('.social__text').textContent = message;
-    similarListFragment.appendChild(commentItem);
+    const commentClone = comment.cloneNode(true);
+    commentClone.querySelector('img').src = avatar;
+    commentClone.querySelector('.social__picture').alt = name;
+    commentClone.querySelector('.social__text').textContent = message;
+    documentFragment.appendChild(commentClone);
     breakBtn++;
   });
-
-  commentsList.replaceChildren(similarListFragment);
+  commentsList.replaceChildren(documentFragment);
 };
 
-export { createFullSizeImage };
+const onCLoseFullPhoto = function () {
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
+
+const createFullSizeImage = function (data) {
+  const likesCount = bigPicture.querySelector('.likes-count');
+  const socialCommentCount = bigPicture.querySelector('.social__comment-count');
+  const descriptionPhoto = bigPicture.querySelector('.social__caption');
+  const commentsList = bigPicture.querySelector('.social__comments');
+  const comment = bigPicture.querySelector('.social__comment');
+  const commentsLoader = bigPicture.querySelector('.comments-loader');
+
+  bigPicture.classList.remove('hidden');
+  body.classList.add('modal-open');
+  socialCommentCount.classList.remove('hidden');
+  commentsLoader.classList.remove('hidden');
+
+  limit = 5;
+  if (limit >= data.comments.length) {
+    limit = data.comments.length;
+    commentsLoader.classList.add('hidden');
+  }
+  bigPicture.querySelector('img').src = data.url;
+  likesCount.textContent = data.likes;
+  descriptionPhoto.textContent = data.description;
+  socialCommentCount.textContent = `${limit} из ${data.comments.length} комментариев`;
+  createComments(comment, commentsList, data);
+
+  const onLoadMore = function () {
+    limit += 5;
+    if (limit >= data.comments.length) {
+      limit = data.comments.length;
+      commentsLoader.classList.add('hidden');
+    }
+    socialCommentCount.textContent = `${limit} из ${data.comments.length} комментариев`;
+    createComments(comment, commentsList, data);
+  };
+
+  const onRemoveListenerCommentsLoader = function () {
+    commentsLoader.removeEventListener('click', onLoadMore);
+  };
+
+  commentsLoader.addEventListener('click', onLoadMore);
+  const closeFullButton = bigPicture.querySelector('.big-picture__cancel');
+  closeFullButton.addEventListener('click', onRemoveListenerCommentsLoader);
+  document.addEventListener('keydown', onRemoveListenerCommentsLoader);
+
+};
+export { createFullSizeImage, onCLoseFullPhoto };

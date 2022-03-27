@@ -29,7 +29,7 @@ const createData = function (maxLength) {
       url: IMG_START + (index + 1) + IMG_EXTEND,
       description: 'Ехал грека через реку',
       likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
-      comments: createComments(getRandomInteger(2, 150)),
+      comments: createComments(getRandomInteger(2, 15)),
     });
   }
   return result;
