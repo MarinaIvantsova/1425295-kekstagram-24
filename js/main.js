@@ -2,6 +2,7 @@ import { createData } from './data.js';
 import { MAX_ITEM } from './constants.js';
 import { createPicturesFragment } from './pictures.js';
 import { onChangeUploadFile, onCLoseModal, onCloseModalEsc, onUploadForm } from './form.js';
+import { onCLoseFullPhoto } from './full-size.js';
 
 const data = createData(MAX_ITEM);
 const bigPicture = document.querySelector('.big-picture');
@@ -11,6 +12,7 @@ const uploadFile = document.querySelector('#upload-file');
 
 const uploadCancel = document.querySelector('#upload-cancel');
 const formUploadElement = document.querySelector('#upload-select-image');
+const fullPhotoCancel = document.querySelector('#picture-cancel');
 
 
 similarListPicture.appendChild(
@@ -33,3 +35,5 @@ uploadFile.addEventListener( 'change', onChangeUploadFile);
 uploadCancel.addEventListener('click', onCLoseModal);
 document.addEventListener('keydown', onCloseModalEsc);
 formUploadElement.addEventListener('input', onUploadForm);
+fullPhotoCancel.addEventListener('click', onCLoseFullPhoto);
+
