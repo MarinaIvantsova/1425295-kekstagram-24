@@ -28,7 +28,6 @@ const onCLoseFullPhoto = function () {
 
 const createFullSizeImage = function (data) {
   const likesCount = bigPicture.querySelector('.likes-count');
-  //const commentsCount = bigPicture.querySelector('.comments-count');
   const socialCommentCount = bigPicture.querySelector('.social__comment-count');
   const descriptionPhoto = bigPicture.querySelector('.social__caption');
   const commentsList = bigPicture.querySelector('.social__comments');
